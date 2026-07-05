@@ -14,12 +14,16 @@ const inter = Inter({
 
 const title = `${site.name} — ${site.role}`;
 
+// Set NEXT_PUBLIC_SITE_URL in your host (Cloudflare Pages) to your real domain.
+// Accepts either a full URL ("https://jeanark.dev") or a bare domain ("jeanark.dev").
+const rawSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://jeanark.dev";
+const siteUrl = /^https?:\/\//i.test(rawSiteUrl)
+  ? rawSiteUrl
+  : `https://${rawSiteUrl}`;
+
 export const metadata: Metadata = {
-  // Set NEXT_PUBLIC_SITE_URL in your host (Cloudflare Pages) to your real domain
-  // so share links & the OG image resolve to absolute URLs.
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://arkinov.dev"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: title,
     template: `%s — ${site.name}`,
