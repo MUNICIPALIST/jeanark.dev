@@ -15,8 +15,11 @@ const inter = Inter({
 const title = `${site.name} — ${site.role}`;
 
 export const metadata: Metadata = {
-  // TODO: set your real deployed domain so share links & OG image resolve absolutely.
-  metadataBase: new URL("https://arkinov.dev"),
+  // Set NEXT_PUBLIC_SITE_URL in your host (Cloudflare Pages) to your real domain
+  // so share links & the OG image resolve to absolute URLs.
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://arkinov.dev"
+  ),
   title: {
     default: title,
     template: `%s — ${site.name}`,

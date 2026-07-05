@@ -1,0 +1,10 @@
+# Cloudflare Pages headers (this file is served from the deploy root).
+
+# The generated OG image has no file extension — force its content-type
+# so social scrapers (Telegram, LinkedIn, X…) recognize it as an image.
+/opengraph-image
+  Content-Type: image/png
+
+# Hashed Next.js assets are safe to cache forever.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
