@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (next-themes adds `.dark` on <html>). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Anthropic identity tokens ------------------------------------------- */
+/* Light is the default; .dark overrides. Components use the semantic colors
+   (bg-background, text-foreground, border-border, text-accent...) and adapt
+   automatically because these variables switch. */
+:root {
+  color-scheme: light;
+  --background: #faf9f5; /* Anthropic off-white */
+  --foreground: #141413; /* ink */
+  --muted: #6f6e69; /* readable secondary text */
+  --surface: #f2f0e9; /* faint raised surface */
+  --border: #e8e6dc; /* warm hairline */
+  --accent: #d97757; /* signature orange — change here to recolor */
+  --accent-ink: #141413; /* text on the accent (e.g. selection) */
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #1a1917; /* warm charcoal */
+  --foreground: #ece9e1;
+  --muted: #9a978d;
+  --surface: #21201d;
+  --border: #2e2c28;
+  --accent: #e08a67; /* lifted orange for dark */
+  --accent-ink: #141413;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  /* One clean grotesque (Inter) for everything — like anthropic.com. */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inter);
+}
+
+/* ---- Base ---------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: auto; /* Lenis handles smooth scrolling */
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Tight, sans display treatment for headings (grotesque, not serif). */
+  .font-display {
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+/* Respect reduced-motion: kill long transitions/animations globally. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
