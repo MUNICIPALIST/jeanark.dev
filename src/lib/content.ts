@@ -36,9 +36,9 @@ export const socials = [
 export const now = ["Docker", "Kubernetes", "Python", "PyTorch", "SQL"];
 
 /**
- * Selected work. Previews are auto-generated screenshots (WordPress mShots).
- * To use your own image instead, drop a file in /public and set `image`,
- * e.g. image: "/projects/beket.png".
+ * Selected work. Previews are screenshots in /public/projects/<slug>.webp
+ * (slug = the project's domain, e.g. "unchina.study.webp"); refresh them with
+ * `npm run screenshots`. Set `image` to override the path for a project.
  */
 export type Project = {
   name: string;
@@ -62,6 +62,15 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Python", "AI"],
   },
   {
+    name: "UniChina",
+    url: "https://unchina.study/",
+    blurb:
+      "Admissions to Chinese universities for students from Kazakhstan — programs, grants, visas & mentoring.",
+    role: "Full-stack",
+    year: "2026",
+    stack: ["SvelteKit", "Cloudflare Workers"],
+  },
+  {
     name: "Re-gix",
     url: "https://re-gix.tech/",
     blurb: "Technology product & platform.", // TODO: refine
@@ -73,14 +82,6 @@ export const projects: Project[] = [
     name: "Uiren Go",
     url: "https://uirengo.kz/",
     blurb: "B2B platform connecting schools & educators with students.",
-    role: "Full-stack",
-    year: "2024",
-    stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],
-  },
-  {
-    name: "Beket",
-    url: "https://beket.kz/",
-    blurb: "Intercity bus-ticket booking across Kazakhstan.",
     role: "Full-stack",
     year: "2024",
     stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],

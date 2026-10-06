@@ -12,6 +12,7 @@ npm run dev      # http://localhost:3010
 npm run build    # static output -> ./out
 npm run preview  # serve ./out
 npm run check    # type-check .astro/.ts files
+npm run screenshots [-- unchina.study]  # refresh project previews (needs local Chrome)
 ```
 
 Requires Node 22.12+ (see `.nvmrc`).
@@ -22,6 +23,7 @@ Requires Node 22.12+ (see `.nvmrc`).
 - `src/components/sections/` — Hero, About, Stack, Work
 - `src/layouts/Base.astro` — `<head>`, SEO/OG tags, theme bootstrap, scroll-reveal script
 - `src/styles/global.css` — color tokens (light/dark), base styles, animations
+- `public/projects/` — project preview screenshots (`<domain>.webp`)
 - `public/` — static files (`og.png` share image, `icon.svg`, `_headers`, add `cv.pdf` here)
 
 Deploy: see [DEPLOY.md](DEPLOY.md).
