@@ -1,0 +1,94 @@
+---
+import { now, site, socials } from "@/lib/content";
+import { container } from "@/lib/utils";
+
+/** Fade-up entrance with a per-block delay (pure CSS, no JS). */
+const up = (delay: number) => `--delay: ${delay}s`;
+---
+
+<section id="top" class="flex min-h-screen flex-col">
+  <div class="flex flex-1 items-center pt-24">
+    <div class={container}>
+      <div class="animate-fade-up" style={up(0.05)}>
+        <p class="font-display text-lg font-medium tracking-tight">
+          {site.name}
+        </p>
+        <p class="mt-1 text-sm text-muted">
+          {site.role} &middot; {site.location}
+        </p>
+      </div>
+
+      <h1
+        class="animate-fade-up mt-10 font-display text-[clamp(2.25rem,6.5vw,4.75rem)] font-medium leading-[1.05]"
+        style={up(0.12)}
+      >
+        <span class="block">{site.headlineLine1}</span>
+        <span class="block">{site.headlineLine2}</span>
+      </h1>
+
+      <p
+        class="animate-fade-up mt-7 max-w-xl text-balance text-lg leading-relaxed text-muted"
+        style={up(0.22)}
+      >
+        {site.tagline}
+      </p>
+
+      <div class="animate-fade-up mt-12" style={up(0.32)}>
+        <p class="text-xs uppercase tracking-[0.2em] text-muted">Currently</p>
+        <p class="mt-2 text-base font-medium">{now.join("  ·  ")}</p>
+      </div>
+
+      <div
+        class="animate-fade-up mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm"
+        style={up(0.42)}
+      >
+        <a
+          href={`mailto:${site.email}`}
+          class="text-accent underline decoration-accent/30 decoration-1 underline-offset-4 transition-colors hover:decoration-accent"
+        >
+          {site.email}
+        </a>
+        <span aria-hidden="true" class="text-border">·</span>
+        {
+          socials.map((s, i) => (
+            <span class="flex items-center gap-5">
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-muted underline-offset-4 transition-colors hover:text-foreground hover:underline"
+              >
+                {s.label}
+              </a>
+              {i < socials.length - 1 && (
+                <span aria-hidden="true" class="text-border">
+                  ·
+                </span>
+              )}
+            </span>
+          ))
+        }
+        <span aria-hidden="true" class="text-border">·</span>
+        <a
+          href={site.resumeUrl}
+          download
+          class="text-muted underline-offset-4 transition-colors hover:text-foreground hover:underline"
+        >
+          Download CV ↓
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="animate-fade-up pb-10" style={up(0.55)}>
+    <div class={container}>
+      <a
+        href="#about"
+        class="group inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+      >
+        Scroll
+        <span aria-hidden="true" class="transition-transform group-hover:translate-y-0.5">↓</span>
+      </a>
+    </div>
+  </div>
+</section>

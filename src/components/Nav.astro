@@ -1,0 +1,44 @@
+---
+import { site } from "@/lib/content";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+---
+
+<header
+  data-nav
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-colors duration-300 data-scrolled:border-border data-scrolled:bg-background/80 data-scrolled:backdrop-blur-sm"
+>
+  <div class="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-5 md:px-8">
+    <a href="#top" class="font-display text-base font-medium tracking-tight">
+      {site.name}
+    </a>
+
+    <div class="flex items-center gap-4 sm:gap-6">
+      <a
+        href="#about"
+        class="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
+      >
+        About
+      </a>
+      <a
+        href="#work"
+        class="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
+      >
+        Work
+      </a>
+      <a
+        href={`mailto:${site.email}`}
+        class="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+      >
+        Get in touch
+      </a>
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]")!;
+  const onScroll = () => nav.toggleAttribute("data-scrolled", window.scrollY > 16);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+</script>

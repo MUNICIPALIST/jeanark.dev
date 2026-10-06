@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Enable class-based dark mode (next-themes adds `.dark` on <html>). */
+/* Enable class-based dark mode (the theme script adds `.dark` on <html>). */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---- Anthropic identity tokens ------------------------------------------- */
@@ -39,19 +39,22 @@
   --color-accent-ink: var(--accent-ink);
 
   /* One clean grotesque (Inter) for everything — like anthropic.com. */
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-inter);
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-display: "Inter Variable", system-ui, sans-serif;
 }
 
 /* ---- Base ---------------------------------------------------------------- */
 @layer base {
   html {
-    scroll-behavior: auto; /* Lenis handles smooth scrolling */
+    scroll-behavior: smooth;
+  }
+  /* Keep anchored sections clear of the fixed nav. */
+  section[id] {
+    scroll-margin-top: 72px;
   }
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: var(--font-inter), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -69,8 +72,40 @@
   }
 }
 
-/* Respect reduced-motion: kill long transitions/animations globally. */
+/* ---- Motion -------------------------------------------------------------- */
+/* Entrance: plays on load with no JS, so the hero is in the very first paint. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Reveal on scroll: hidden only when JS is available to reveal it again. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 16px));
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect reduced-motion: no travel, kill long transitions/animations. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal] {
+    transform: none;
+  }
   *,
   *::before,
   *::after {

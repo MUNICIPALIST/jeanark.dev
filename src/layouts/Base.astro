@@ -1,0 +1,87 @@
+---
+import "@fontsource-variable/inter";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import "@/styles/global.css";
+import { site } from "@/lib/content";
+import Nav from "@/components/Nav.astro";
+
+const title = `${site.name} — ${site.role}`;
+const description = site.tagline;
+const keywords = [
+  site.name,
+  "Infrastructure Engineer",
+  "ML Engineer",
+  "MLOps",
+  "Data Engineering",
+  "DevOps",
+  "Python",
+  "Docker",
+  "Kubernetes",
+  "Portfolio",
+];
+const url = new URL("/", Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <meta name="keywords" content={keywords.join(",")} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Runs before paint: apply the saved theme (dark by default) and flag JS. -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        let theme = "dark";
+        try {
+          theme = localStorage.getItem("theme") || "dark";
+        } catch {}
+        root.classList.toggle("dark", theme === "dark");
+        root.classList.add("js");
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <Nav />
+    <slot />
+
+    <script>
+      // Reveal [data-reveal] blocks once, when they scroll into view.
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        },
+        { rootMargin: "0px 0px -12% 0px" },
+      );
+      document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

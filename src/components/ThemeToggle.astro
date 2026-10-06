@@ -1,0 +1,74 @@
+---
+// Icon visibility is driven by the `.dark` class in CSS, so there's no
+// hydration flash and no placeholder state.
+---
+
+<button
+  type="button"
+  aria-label="Toggle theme"
+  data-theme-toggle
+  class="-m-2 grid h-9 w-9 place-items-center rounded-full text-muted transition-colors hover:text-foreground"
+>
+  <span class="grid place-items-center [grid-area:1/1] transition-[opacity,scale] duration-200 ease-out dark:scale-80 dark:opacity-0">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+      ></path>
+    </svg>
+  </span>
+  <span class="grid scale-80 place-items-center opacity-0 [grid-area:1/1] transition-[opacity,scale] duration-200 ease-out dark:scale-100 dark:opacity-100">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const button = document.querySelector<HTMLButtonElement>("[data-theme-toggle]")!;
+
+  function label() {
+    button.ariaLabel = root.classList.contains("dark")
+      ? "Switch to light theme"
+      : "Switch to dark theme";
+  }
+
+  button.addEventListener("click", () => {
+    const next = root.classList.contains("dark") ? "light" : "dark";
+    // Disable transitions for the switch itself so colors flip in one frame.
+    const freeze = document.createElement("style");
+    freeze.textContent =
+      "*:not([data-theme-toggle] > span),*::before,*::after{transition:none!important}";
+    document.head.appendChild(freeze);
+    root.classList.toggle("dark", next === "dark");
+    try {
+      localStorage.setItem("theme", next);
+    } catch {}
+    label();
+    getComputedStyle(document.body);
+    requestAnimationFrame(() => freeze.remove());
+  });
+
+  label();
+</script>

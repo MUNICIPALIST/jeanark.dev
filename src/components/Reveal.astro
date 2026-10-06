@@ -1,0 +1,21 @@
+---
+type Props = {
+  class?: string;
+  delay?: number;
+  /** vertical travel distance in px */
+  y?: number;
+};
+
+/** Fades + slides its children up once, when scrolled into view. */
+const { class: className, delay = 0, y } = Astro.props;
+const style = [
+  delay ? `--delay: ${delay}s` : "",
+  y !== undefined ? `--reveal-y: ${y}px` : "",
+]
+  .filter(Boolean)
+  .join("; ");
+---
+
+<div class={className} style={style || undefined} data-reveal>
+  <slot />
+</div>
