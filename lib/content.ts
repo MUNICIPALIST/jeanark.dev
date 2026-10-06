@@ -5,20 +5,20 @@
 
 export const site = {
   name: "Arkinov Jean",
-  role: "Software Engineer",
+  role: "Infrastructure Engineer (ML/Data)",
   location: "Remote",
 
   // The statement headline, split across two lines.
-  headlineLine1: "Reliable software,",
-  headlineLine2: "engineered simply.",
+  headlineLine1: "Scalable infrastructure,",
+  headlineLine2: "powered by data.",
 
   // One short supporting line under the headline.
   tagline:
-    "A developer who cares about clean, dependable systems — and is always growing into the next thing.",
+    "I build and maintain infrastructure that makes machine learning and data systems work — from training pipelines to production deployment.",
 
   // Short bio for the About section (2–4 sentences).
   about:
-    "I'm Arkinov Jean — a software engineer who designs and builds fast, reliable web products end to end. Over the last few years I've shipped real platforms for businesses across Kazakhstan, from a bus-ticketing system to B2B and booking products. I care about clean architecture, simple UX, and shipping things that last.",
+    "I'm Arkinov Jean — an infrastructure engineer specializing in ML and data systems. Over the last few years I've built and shipped production platforms end to end, from bus-ticketing systems to B2B products. Today I focus on designing reliable infrastructure for machine learning pipelines, data processing, and production deployment — with additional experience across the full stack.",
 
   email: "zhan@topmdhealth.com",
 
@@ -33,7 +33,7 @@ export const socials = [
 ];
 
 /** What I work with right now (the longer roadmap lives in future_skills.md). */
-export const now = ["Docker", "Python", "Nginx", "Git"];
+export const now = ["Docker", "Kubernetes", "Python", "PyTorch", "SQL"];
 
 /**
  * Selected work. Previews are auto-generated screenshots (WordPress mShots).
@@ -115,5 +115,6 @@ export const projects: Project[] = [
 export const stack = [
   { group: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
   { group: "Backend", items: ["Python", "Node.js", "PostgreSQL", "REST APIs"] },
-  { group: "DevOps", items: ["Docker", "Nginx", "Git", "CI/CD"] },
+  { group: "DevOps", items: ["Docker", "Kubernetes", "Nginx", "Git", "CI/CD"] },
+  { group: "ML/Data", items: ["Python", "PyTorch", "scikit-learn", "SQL", "MLflow"] },
 ];
