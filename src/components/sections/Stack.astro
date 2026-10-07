@@ -22,8 +22,11 @@ import Reveal from "@/components/Reveal.astro";
             <div class="grid grid-cols-1 gap-3 border-b border-border py-7 md:grid-cols-12 md:gap-8">
               <h3 class="font-display text-lg font-medium md:col-span-3">{group.group}</h3>
               <ul class="flex flex-wrap gap-2 md:col-span-9">
-                {group.items.map((item) => (
-                  <li class="rounded-full border border-border px-3 py-1 text-sm text-muted">
+                {group.items.map((item, j) => (
+                  <li
+                    class="chip rounded-full border border-border px-3 py-1 text-sm text-muted"
+                    style={`--i: ${j}`}
+                  >
                     {item}
                   </li>
                 ))}

@@ -98,6 +98,228 @@
   transform: none;
 }
 
+/* ---- Hero: headline words ------------------------------------------------ */
+.word {
+  display: inline-block;
+  animation: word-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.12s + var(--i, 0) * 0.09s);
+}
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(10px);
+  }
+}
+/* Accent line: a highlight sweeps through the text. */
+.word-accent {
+  background-image: linear-gradient(
+    100deg,
+    var(--foreground) 0%,
+    var(--foreground) 38%,
+    var(--accent) 50%,
+    var(--foreground) 62%,
+    var(--foreground) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation:
+    word-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(0.12s + var(--i, 0) * 0.09s) both,
+    shimmer 7s ease-in-out 2s infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  60%,
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* ---- Hero: drifting aurora ------------------------------------------------ */
+.aurora {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+.aurora i {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklab, var(--accent) 38%, transparent),
+    transparent
+  );
+  opacity: 0.55;
+  animation: drift 20s ease-in-out infinite alternate;
+}
+.aurora i:nth-child(1) {
+  top: -14rem;
+  right: -10rem;
+  width: 46rem;
+  height: 46rem;
+}
+.aurora i:nth-child(2) {
+  bottom: -4rem;
+  left: -12rem;
+  width: 36rem;
+  height: 36rem;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklab, #6a9bcc 32%, transparent),
+    transparent
+  );
+  animation-duration: 27s;
+  animation-delay: -9s;
+}
+.aurora i:nth-child(3) {
+  top: 30%;
+  left: 38%;
+  width: 22rem;
+  height: 22rem;
+  opacity: 0.35;
+  animation-duration: 33s;
+  animation-delay: -15s;
+}
+html:not(.dark) .aurora i {
+  opacity: 0.32;
+}
+@keyframes drift {
+  to {
+    transform: translate3d(-5rem, 4rem, 0) scale(1.18);
+  }
+}
+
+/* ---- Page-level: cursor spotlight + scroll progress ----------------------- */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background: radial-gradient(
+    560px circle at var(--mx, 50%) var(--my, 30%),
+    color-mix(in oklab, var(--accent) 13%, transparent),
+    transparent 65%
+  );
+}
+.spotlight.on {
+  opacity: 1;
+}
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---- Hero: scroll cue ----------------------------------------------------- */
+.bob {
+  display: inline-block;
+  animation: bob 1.8s ease-in-out infinite;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* ---- Marquee -------------------------------------------------------------- */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---- Stack chips: pop in one by one, lift on hover ------------------------ */
+.chip {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s,
+    color 0.2s;
+}
+.chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  color: var(--foreground);
+}
+.js [data-reveal]:not(.is-visible) .chip {
+  opacity: 0;
+}
+.js [data-reveal].is-visible .chip {
+  animation: chip-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(0.15s + var(--i, 0) * 50ms);
+}
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+  }
+}
+
+/* ---- Project cards: 3D tilt + glare --------------------------------------- */
+.tilt-frame {
+  position: relative;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    translateY(var(--lift, 0px));
+  transition:
+    transform 0.2s ease-out,
+    border-color 0.3s;
+  will-change: transform;
+}
+[data-tilt]:hover .tilt-frame {
+  --lift: -4px;
+}
+.glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(
+    420px circle at var(--gx, 50%) var(--gy, 50%),
+    rgb(255 255 255 / 0.16),
+    transparent 60%
+  );
+}
+[data-tilt]:hover .glare {
+  opacity: 1;
+}
+
 /* Respect reduced-motion: no travel, kill long transitions/animations. */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -105,6 +327,10 @@
   }
   .js [data-reveal] {
     transform: none;
+  }
+  .scroll-progress,
+  .spotlight {
+    display: none;
   }
   *,
   *::before,

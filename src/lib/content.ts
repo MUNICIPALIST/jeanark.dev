@@ -18,12 +18,9 @@ export const site = {
 
   // Short bio for the About section (2–4 sentences).
   about:
-    "I'm Arkinov Jean — an infrastructure engineer specializing in ML and data systems. Over the last few years I've built and shipped production platforms end to end, from bus-ticketing systems to B2B products. Today I focus on designing reliable infrastructure for machine learning pipelines, data processing, and production deployment — with additional experience across the full stack.",
+    "I'm Arkinov Jean — an infrastructure engineer specializing in ML and data systems. Over the last few years I've built and shipped production platforms end to end, from booking platforms to B2B products. Today I focus on designing reliable infrastructure for machine learning pipelines, data processing, and production deployment — with additional experience across the full stack.",
 
   email: "zhan@topmdhealth.com",
-
-  // Drop your PDF at /public/cv.pdf (or change this path).
-  resumeUrl: "/cv.pdf",
 };
 
 export const socials = [
@@ -73,7 +70,7 @@ export const projects: Project[] = [
   {
     name: "Re-gix",
     url: "https://re-gix-landing.jeanark.workers.dev/",
-    blurb: "Technology product & platform.", // TODO: refine
+    blurb: "Game studio site — Dark & Silent, a survival-horror game in development.",
     role: "Full-stack",
     year: "2025",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],

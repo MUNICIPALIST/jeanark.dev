@@ -24,6 +24,6 @@ Requires Node 22.12+ (see `.nvmrc`).
 - `src/layouts/Base.astro` — `<head>`, SEO/OG tags, theme bootstrap, scroll-reveal script
 - `src/styles/global.css` — color tokens (light/dark), base styles, animations
 - `public/projects/` — project preview screenshots (`<domain>.webp`)
-- `public/` — static files (`og.png` share image, `icon.svg`, `_headers`, add `cv.pdf` here)
+- `public/` — static files (`og.png` share image, `icon.svg`, `_headers`)
 
 Deploy: see [DEPLOY.md](DEPLOY.md).

@@ -58,4 +58,3 @@ Every `git push` to the connected branch **auto-deploys**. Other branches get pr
 - `.nvmrc` pins Node 22 (Astro 7 needs Node 22.12+). If `NODE_VERSION` is set in the Pages
   dashboard it overrides `.nvmrc` — make sure it is `22`.
 - `public/og.png` is the social share image; replace it if you change the headline/role.
-- Add `public/cv.pdf` for the "Download CV" button to work.

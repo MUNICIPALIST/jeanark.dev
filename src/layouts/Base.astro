@@ -66,6 +66,8 @@ const ogImage = new URL("/og.png", Astro.site);
     </script>
   </head>
   <body class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="spotlight" aria-hidden="true"></div>
     <Nav />
     <slot />
 
@@ -82,6 +84,47 @@ const ogImage = new URL("/og.png", Astro.site);
         { rootMargin: "0px 0px -12% 0px" },
       );
       document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+
+      // Pointer effects: cursor spotlight + 3D tilt on project cards.
+      const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (fine && !calm) {
+        const spot = document.querySelector<HTMLElement>(".spotlight")!;
+        let frame = 0;
+        addEventListener(
+          "pointermove",
+          (e) => {
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+              frame = 0;
+              spot.style.setProperty("--mx", `${e.clientX}px`);
+              spot.style.setProperty("--my", `${e.clientY}px`);
+              spot.classList.add("on");
+            });
+          },
+          { passive: true },
+        );
+        document.documentElement.addEventListener("pointerleave", () =>
+          spot.classList.remove("on"),
+        );
+
+        document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
+          const box = card.querySelector<HTMLElement>(".tilt-frame")!;
+          card.addEventListener("pointermove", (e) => {
+            const r = box.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width;
+            const y = (e.clientY - r.top) / r.height;
+            card.style.setProperty("--ry", `${((x - 0.5) * 9).toFixed(2)}deg`);
+            card.style.setProperty("--rx", `${((0.5 - y) * 7).toFixed(2)}deg`);
+            card.style.setProperty("--gx", `${(x * 100).toFixed(1)}%`);
+            card.style.setProperty("--gy", `${(y * 100).toFixed(1)}%`);
+          });
+          card.addEventListener("pointerleave", () => {
+            card.style.setProperty("--rx", "0deg");
+            card.style.setProperty("--ry", "0deg");
+          });
+        });
+      }
     </script>
   </body>
 </html>

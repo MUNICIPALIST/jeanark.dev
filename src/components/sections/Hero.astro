@@ -4,9 +4,15 @@ import { container } from "@/lib/utils";
 
 /** Fade-up entrance with a per-block delay (pure CSS, no JS). */
 const up = (delay: number) => `--delay: ${delay}s`;
+
+// Headline is split into words so each one can animate in separately.
+const lines = [site.headlineLine1, site.headlineLine2];
+let wordIndex = 0;
 ---
 
-<section id="top" class="flex min-h-screen flex-col">
+<section id="top" class="relative isolate flex min-h-screen flex-col">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
   <div class="flex flex-1 items-center pt-24">
     <div class={container}>
       <div class="animate-fade-up" style={up(0.05)}>
@@ -19,28 +25,39 @@ const up = (delay: number) => `--delay: ${delay}s`;
       </div>
 
       <h1
-        class="animate-fade-up mt-10 font-display text-[clamp(2.25rem,6.5vw,4.75rem)] font-medium leading-[1.05]"
-        style={up(0.12)}
+        class="mt-10 font-display text-[clamp(2.25rem,6.5vw,4.75rem)] font-medium leading-[1.05]"
+        aria-label={lines.join(" ")}
       >
-        <span class="block">{site.headlineLine1}</span>
-        <span class="block">{site.headlineLine2}</span>
+        {
+          lines.map((line, li) => (
+            <span class="block" aria-hidden="true">
+              {line.split(" ").map((word) => (
+                <>
+                  <span class:list={["word", li === lines.length - 1 && "word-accent"]} style={`--i: ${wordIndex++}`}>
+                    {word}
+                  </span>{" "}
+                </>
+              ))}
+            </span>
+          ))
+        }
       </h1>
 
       <p
         class="animate-fade-up mt-7 max-w-xl text-balance text-lg leading-relaxed text-muted"
-        style={up(0.22)}
+        style={up(0.55)}
       >
         {site.tagline}
       </p>
 
-      <div class="animate-fade-up mt-12" style={up(0.32)}>
+      <div class="animate-fade-up mt-12" style={up(0.7)}>
         <p class="text-xs uppercase tracking-[0.2em] text-muted">Currently</p>
         <p class="mt-2 text-base font-medium">{now.join("  ·  ")}</p>
       </div>
 
       <div
         class="animate-fade-up mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm"
-        style={up(0.42)}
+        style={up(0.85)}
       >
         <a
           href={`mailto:${site.email}`}
@@ -48,10 +65,12 @@ const up = (delay: number) => `--delay: ${delay}s`;
         >
           {site.email}
         </a>
-        <span aria-hidden="true" class="text-border">·</span>
         {
-          socials.map((s, i) => (
-            <span class="flex items-center gap-5">
+          socials.map((s) => (
+            <>
+              <span aria-hidden="true" class="text-border">
+                ·
+              </span>
               <a
                 href={s.href}
                 target="_blank"
@@ -60,34 +79,21 @@ const up = (delay: number) => `--delay: ${delay}s`;
               >
                 {s.label}
               </a>
-              {i < socials.length - 1 && (
-                <span aria-hidden="true" class="text-border">
-                  ·
-                </span>
-              )}
-            </span>
+            </>
           ))
         }
-        <span aria-hidden="true" class="text-border">·</span>
-        <a
-          href={site.resumeUrl}
-          download
-          class="text-muted underline-offset-4 transition-colors hover:text-foreground hover:underline"
-        >
-          Download CV ↓
-        </a>
       </div>
     </div>
   </div>
 
-  <div class="animate-fade-up pb-10" style={up(0.55)}>
+  <div class="animate-fade-up pb-10" style={up(1)}>
     <div class={container}>
       <a
         href="#about"
-        class="group inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+        class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
       >
         Scroll
-        <span aria-hidden="true" class="transition-transform group-hover:translate-y-0.5">↓</span>
+        <span aria-hidden="true" class="bob">↓</span>
       </a>
     </div>
   </div>

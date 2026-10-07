@@ -37,10 +37,11 @@ function previewSrc(p: Project) {
               rel="noopener noreferrer"
               class="group block"
               data-reveal
+              data-tilt
               style={`--reveal-y: 18px; --delay: ${(i % 2) * 0.08}s`}
             >
               {/* browser-frame mockup */}
-              <div class="overflow-hidden rounded-xl border border-border bg-surface transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent">
+              <div class="tilt-frame overflow-hidden rounded-xl border border-border bg-surface group-hover:border-accent">
                 <div class="flex items-center gap-1.5 border-b border-border px-3.5 py-2.5">
                   <span class="h-2.5 w-2.5 rounded-full bg-border" />
                   <span class="h-2.5 w-2.5 rounded-full bg-border" />
@@ -61,6 +62,7 @@ function previewSrc(p: Project) {
                     onerror="this.style.opacity='0'"
                   />
                 </div>
+                <div class="glare" aria-hidden="true"></div>
               </div>
 
               {/* meta */}
