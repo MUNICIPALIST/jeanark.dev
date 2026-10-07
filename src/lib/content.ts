@@ -72,7 +72,7 @@ export const projects: Project[] = [
   },
   {
     name: "Re-gix",
-    url: "https://re-gix.tech/",
+    url: "https://re-gix-landing.jeanark.workers.dev/",
     blurb: "Technology product & platform.", // TODO: refine
     role: "Full-stack",
     year: "2025",

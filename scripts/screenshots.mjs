@@ -15,12 +15,6 @@ const OUT = new URL("../public/projects/", import.meta.url);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const domainOf = (url) => new URL(url).host.replace(/^www\./, "");
 
-// Capture from another URL when the public domain is unreachable.
-// re-gix.tech: domain DNS is parked at the registrar, the Worker itself is up.
-const SOURCE = {
-  "re-gix.tech": "https://re-gix-landing.spichka.workers.dev/",
-};
-
 // Close cookie banners / lead-capture modals before the screenshot.
 const DISMISS = `(() => {
   document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
@@ -85,7 +79,7 @@ await send("Emulation.setDeviceMetricsOverride", {
 for (const p of targets) {
   const file = `${domainOf(p.url)}.webp`;
   const load = loaded(20000);
-  await send("Page.navigate", { url: SOURCE[domainOf(p.url)] ?? p.url });
+  await send("Page.navigate", { url: p.url });
   await load;
   await sleep(3000); // let fonts, images and entrance animations settle
   await send("Runtime.evaluate", { expression: DISMISS });
