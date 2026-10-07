@@ -67,7 +67,6 @@ const ogImage = new URL("/og.png", Astro.site);
   </head>
   <body class="min-h-screen bg-background font-sans text-foreground antialiased">
     <div class="scroll-progress" aria-hidden="true"></div>
-    <div class="spotlight" aria-hidden="true"></div>
     <Nav />
     <slot />
 
@@ -85,28 +84,62 @@ const ogImage = new URL("/og.png", Astro.site);
       );
       document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
 
-      // Pointer effects: cursor spotlight + 3D tilt on project cards.
+      const calmMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // "Decode" effect: headings scramble into place when they scroll into view.
+      if (!calmMotion) {
+        const glyphs = "!<>-_/[]{}=+*^?#01";
+        const decode = (el: HTMLElement) => {
+          const text = el.textContent ?? "";
+          el.setAttribute("aria-label", text);
+          const start = performance.now();
+          const total = 650;
+          const tick = (now: number) => {
+            const t = Math.min((now - start) / total, 1);
+            const shown = Math.floor(t * text.length);
+            el.textContent = [...text]
+              .map((c, i) =>
+                c === " " || i < shown ? c : glyphs[Math.floor(Math.random() * glyphs.length)],
+              )
+              .join("");
+            if (t < 1) requestAnimationFrame(tick);
+            else el.textContent = text;
+          };
+          requestAnimationFrame(tick);
+        };
+        const scrambler = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              decode(entry.target as HTMLElement);
+              scrambler.unobserve(entry.target);
+            }
+          },
+          { rootMargin: "0px 0px -12% 0px" },
+        );
+        document.querySelectorAll<HTMLElement>("[data-scramble]").forEach((el) => scrambler.observe(el));
+      }
+
+      // Pointer effects: magnetic button + 3D tilt on project cards.
       const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
       const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (fine && !calm) {
-        const spot = document.querySelector<HTMLElement>(".spotlight")!;
-        let frame = 0;
-        addEventListener(
-          "pointermove",
-          (e) => {
-            if (frame) return;
-            frame = requestAnimationFrame(() => {
-              frame = 0;
-              spot.style.setProperty("--mx", `${e.clientX}px`);
-              spot.style.setProperty("--my", `${e.clientY}px`);
-              spot.classList.add("on");
-            });
-          },
-          { passive: true },
-        );
-        document.documentElement.addEventListener("pointerleave", () =>
-          spot.classList.remove("on"),
-        );
+        // Magnetic buttons: lean toward the cursor when it's near.
+        document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((btn) => {
+          addEventListener(
+            "pointermove",
+            (e) => {
+              const r = btn.getBoundingClientRect();
+              const dx = e.clientX - (r.left + r.width / 2);
+              const dy = e.clientY - (r.top + r.height / 2);
+              const near = Math.hypot(dx, dy) < Math.max(r.width, r.height) * 0.9;
+              btn.style.transform = near
+                ? `translate(${(dx * 0.22).toFixed(1)}px, ${(dy * 0.3).toFixed(1)}px)`
+                : "";
+            },
+            { passive: true },
+          );
+        });
 
         document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
           const box = card.querySelector<HTMLElement>(".tilt-frame")!;

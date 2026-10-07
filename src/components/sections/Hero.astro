@@ -11,6 +11,7 @@ let wordIndex = 0;
 ---
 
 <section id="top" class="relative isolate flex min-h-screen flex-col">
+  <canvas class="graph" data-graph aria-hidden="true"></canvas>
   <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 
   <div class="flex flex-1 items-center pt-24">
@@ -98,3 +99,7 @@ let wordIndex = 0;
     </div>
   </div>
 </section>
+
+<script>
+  import "../../scripts/graph";
+</script>

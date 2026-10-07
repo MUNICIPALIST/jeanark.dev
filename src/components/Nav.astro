@@ -15,18 +15,19 @@ import ThemeToggle from "@/components/ThemeToggle.astro";
     <div class="flex items-center gap-4 sm:gap-6">
       <a
         href="#about"
-        class="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
+        class="hidden text-sm text-muted transition-colors hover:text-foreground aria-[current=true]:text-foreground sm:inline"
       >
         About
       </a>
       <a
         href="#work"
-        class="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
+        class="hidden text-sm text-muted transition-colors hover:text-foreground aria-[current=true]:text-foreground sm:inline"
       >
         Work
       </a>
       <a
         href={`mailto:${site.email}`}
+        data-magnetic
         class="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
       >
         Get in touch
@@ -41,4 +42,20 @@ import ThemeToggle from "@/components/ThemeToggle.astro";
   const onScroll = () => nav.toggleAttribute("data-scrolled", window.scrollY > 16);
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Highlight the nav link of the section currently in the middle of the screen.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"], header a[href^="#"]')];
+  const spy = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        for (const link of links) {
+          if (link.getAttribute("href") === `#${entry.target.id}`) link.setAttribute("aria-current", "true");
+          else link.removeAttribute("aria-current");
+        }
+      }
+    },
+    { rootMargin: "-45% 0px -50% 0px" },
+  );
+  document.querySelectorAll("section[id]").forEach((s) => spy.observe(s));
 </script>
