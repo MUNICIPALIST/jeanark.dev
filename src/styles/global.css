@@ -325,3 +325,12 @@ html:not(.dark) .graph {
     scroll-behavior: auto !important;
   }
 }
+
+/* Collapsible landing sections (Work, Stack): native <details>, state remembered per viewer. */
+.collapse-section > summary::-webkit-details-marker { display: none; }
+.collapse-section .when-open { display: none; }
+.collapse-section[open] .when-open { display: inline; }
+.collapse-section[open] .when-closed { display: none; }
+.collapse-section .chev { display: inline-block; transition: transform 0.25s ease; }
+.collapse-section[open] .chev { transform: rotate(180deg); }
+.collapse-section > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 12px; }

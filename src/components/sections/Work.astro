@@ -19,12 +19,21 @@ function previewSrc(p: Project) {
 
 <section id="work" class="border-t border-border py-24 md:py-32">
   <div class={container}>
+    <details class="collapse-section" data-collapse="work">
+      <summary class="flex cursor-pointer list-none items-end justify-between gap-6">
+        <div>
     <Reveal y={12}>
       <p class="text-xs uppercase tracking-[0.2em] text-muted">Work</p>
       <h2 data-scramble class="mt-4 max-w-2xl font-display text-3xl font-medium leading-tight md:text-4xl">
         Selected projects
       </h2>
     </Reveal>
+        </div>
+        <span class="collapse-toggle mb-1 inline-flex shrink-0 items-center gap-2 rounded-full border border-border px-3.5 py-1.5 text-xs text-muted transition-colors hover:text-foreground">
+          <span class="when-closed">Показать · {projects.length} projects</span><span class="when-open">Свернуть</span>
+          <span class="chev" aria-hidden="true">↓</span>
+        </span>
+      </summary>
 
     <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2">
       {
@@ -90,5 +99,6 @@ function previewSrc(p: Project) {
         })
       }
     </div>
+    </details>
   </div>
 </section>

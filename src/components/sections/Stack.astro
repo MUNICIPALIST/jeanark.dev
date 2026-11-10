@@ -6,6 +6,9 @@ import Reveal from "@/components/Reveal.astro";
 
 <section id="stack" class="border-t border-border py-24 md:py-32">
   <div class={container}>
+    <details class="collapse-section" data-collapse="stack">
+      <summary class="flex cursor-pointer list-none items-end justify-between gap-6">
+        <div>
     <Reveal>
       <p class="text-xs uppercase tracking-[0.2em] text-muted">Stack</p>
     </Reveal>
@@ -14,6 +17,12 @@ import Reveal from "@/components/Reveal.astro";
         Tools I build with
       </h2>
     </Reveal>
+        </div>
+        <span class="collapse-toggle mb-1 inline-flex shrink-0 items-center gap-2 rounded-full border border-border px-3.5 py-1.5 text-xs text-muted transition-colors hover:text-foreground">
+          <span class="when-closed">Показать · {stack.reduce((n, g) => n + g.items.length, 0)} tools</span><span class="when-open">Свернуть</span>
+          <span class="chev" aria-hidden="true">↓</span>
+        </span>
+      </summary>
 
     <div class="mt-12 border-t border-border">
       {
@@ -36,5 +45,6 @@ import Reveal from "@/components/Reveal.astro";
         ))
       }
     </div>
+    </details>
   </div>
 </section>
