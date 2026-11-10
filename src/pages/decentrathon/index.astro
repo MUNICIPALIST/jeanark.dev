@@ -1,0 +1,29 @@
+---
+import Doc from "@/layouts/Doc.astro";
+import docs from "@/lib/decentrathon-docs.json";
+const groups = [...new Set(docs.map((d) => d.group))];
+---
+
+<Doc frontmatter={{ title: "Все документы проекта", group: "Оглавление" }}>
+  <p>
+    Командный проект на хакатоне Decentrathon 6.0, трек Support Copilot: черновики ответов поддержки с поиском по
+    базе знаний, классификатором обращений и защитой от выдуманных ответов. Здесь собраны документы, которые мы
+    писали по ходу работы: отчёт по сервису, аудит безопасности, деплой и журнал всех этапов — как есть.
+  </p>
+  <p>
+    Начните с <a href="/decentrathon/report/">отчёта</a> — это полное описание сервиса. Демо-инстанс сейчас выключен;
+    имена участников и условия организаторов в публичную версию не входят.
+  </p>
+  {
+    groups.map((g) => (
+      <>
+        <h2>{g}</h2>
+        <ul>
+          {docs.filter((d) => d.group === g).map((d) => (
+            <li><a href={`/decentrathon/${d.slug}/`}>{d.title}</a> <span style="color:var(--muted);font-size:.85em">· {d.kb} КБ</span></li>
+          ))}
+        </ul>
+      </>
+    ))
+  }
+</Doc>

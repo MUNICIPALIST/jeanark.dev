@@ -128,6 +128,14 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    title: "Support Copilot — Decentrathon 6.0 project docs",
+    href: "/decentrathon/",
+    blurb:
+      "Everything we wrote while building a support-reply copilot at a hackathon: the full service report, security audit (STRIDE / OWASP LLM), deployment, eval metrics and a log of 36 build stages. In Russian.",
+    date: "Nov 2026",
+    tags: ["LLM", "Retrieval", "Classifier", "Eval"],
+  },
+  {
     title: "How I build software with AI agents",
     href: "/alfaria-process/",
     blurb:

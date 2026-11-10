@@ -1,0 +1,68 @@
+---
+/**
+ * Layout for long-form project docs (Markdown pages under src/pages/<project>/).
+ * Standalone (no landing Nav: its #anchors only work on the home page).
+ */
+import "@fontsource-variable/inter";
+import "@/styles/global.css";
+import docs from "@/lib/decentrathon-docs.json";
+
+const { frontmatter } = Astro.props;
+const slug = Astro.url.pathname.replace(/\/$/, "").split("/").pop();
+const i = docs.findIndex((d) => d.slug === slug);
+const prev = i > 0 ? docs[i - 1] : null;
+const next = i >= 0 && i < docs.length - 1 ? docs[i + 1] : null;
+const title = `${frontmatter.title} — Decentrathon 6.0 · Support Copilot`;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={`Документация проекта Support Copilot (Decentrathon 6.0): ${frontmatter.title}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="article" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <script is:inline>
+      (() => { let t = "dark"; try { t = localStorage.getItem("theme") || "dark"; } catch {} document.documentElement.classList.toggle("dark", t === "dark"); })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <header class="border-b border-border">
+      <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-sm sm:px-6">
+        <a href="/" class="text-muted hover:text-foreground">← jeanark.dev</a>
+        <a href="/decentrathon/" class="text-muted hover:text-foreground">Все документы проекта</a>
+      </div>
+    </header>
+    <main class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+      <p class="text-xs uppercase tracking-[0.2em] text-muted">Decentrathon 6.0 · Support Copilot · {frontmatter.group}</p>
+      <h1 class="mt-3 font-display text-3xl font-medium leading-tight md:text-4xl">{frontmatter.title}</h1>
+      <article class="doc mt-8"><slot /></article>
+      <nav class="mt-16 flex flex-col gap-3 border-t border-border pt-6 text-sm sm:flex-row sm:justify-between">
+        {prev ? <a href={`/decentrathon/${prev.slug}/`} class="text-muted hover:text-foreground">← {prev.title}</a> : <span />}
+        {next ? <a href={`/decentrathon/${next.slug}/`} class="text-muted hover:text-foreground sm:text-right">{next.title} →</a> : <span />}
+      </nav>
+    </main>
+    <style is:global>
+      .doc { line-height: 1.7; font-size: 16px; overflow-wrap: anywhere; }
+      .doc h2 { font-size: 1.5rem; font-weight: 600; margin: 2.2em 0 .6em; }
+      .doc h3 { font-size: 1.15rem; font-weight: 600; margin: 1.8em 0 .5em; }
+      .doc h4 { font-weight: 600; margin: 1.4em 0 .4em; }
+      .doc p, .doc ul, .doc ol, .doc blockquote, .doc pre, .doc table { margin: 0 0 1em; }
+      .doc ul { list-style: disc; padding-left: 1.4em; } .doc ol { list-style: decimal; padding-left: 1.4em; }
+      .doc li { margin: .25em 0; }
+      .doc a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+      .doc code { font: .88em ui-monospace, Menlo, monospace; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: .05em .35em; }
+      .doc pre { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; overflow-x: auto; }
+      .doc pre code { background: none; border: 0; padding: 0; font-size: .85em; }
+      .doc blockquote { border-left: 3px solid var(--border); padding-left: 1em; color: var(--muted); }
+      .doc table { display: block; overflow-x: auto; border-collapse: collapse; font-size: .9em; }
+      .doc th, .doc td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
+      .doc th { background: var(--surface); }
+      .doc hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+      .doc img { max-width: 100%; }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,260 @@
+[
+ {
+  "slug": "overview",
+  "title": "Support Copilot",
+  "group": "Обзор",
+  "kb": 43
+ },
+ {
+  "slug": "report",
+  "title": "Отчёт: Support Copilot",
+  "group": "Обзор",
+  "kb": 123
+ },
+ {
+  "slug": "security",
+  "title": "Безопасность и модель угроз",
+  "group": "Безопасность и деплой",
+  "kb": 15
+ },
+ {
+  "slug": "deploy",
+  "title": "Развёртывание Support Copilot",
+  "group": "Безопасность и деплой",
+  "kb": 32
+ },
+ {
+  "slug": "build-plan",
+  "title": "План сборки",
+  "group": "Обзор",
+  "kb": 6
+ },
+ {
+  "slug": "stage-00-scaffold",
+  "title": "Этап 0: каркас",
+  "group": "Журнал этапов",
+  "kb": 2
+ },
+ {
+  "slug": "stage-01-rules-context",
+  "title": "Этап 1: правила, карта пунктов, образцы стиля, база знаний",
+  "group": "Журнал этапов",
+  "kb": 11
+ },
+ {
+  "slug": "stage-02-classify",
+  "title": "Этап 2: разметка, классификатор, приоритет, `extracted`",
+  "group": "Журнал этапов",
+  "kb": 14
+ },
+ {
+  "slug": "stage-03-draft-guard",
+  "title": "Этап 3: шаблоны, клиент LLM, проверка кодом",
+  "group": "Журнал этапов",
+  "kb": 12
+ },
+ {
+  "slug": "stage-04-pipeline",
+  "title": "Этап 4: конвейер, `POST /triage`, `make predict`",
+  "group": "Журнал этапов",
+  "kb": 21
+ },
+ {
+  "slug": "stage-05-eval",
+  "title": "Этап 5: `make eval`, сравнение моделей и режимов, цикл качества",
+  "group": "Журнал этапов",
+  "kb": 25
+ },
+ {
+  "slug": "stage-06-ui",
+  "title": "Этап 6: вход, API очереди, живой интерфейс",
+  "group": "Журнал этапов",
+  "kb": 15
+ },
+ {
+  "slug": "stage-07-dedupe",
+  "title": "Этап 7: дедупликация и предложение шаблонов",
+  "group": "Журнал этапов",
+  "kb": 14
+ },
+ {
+  "slug": "stage-08-docker",
+  "title": "Этап 8: Docker и деплой",
+  "group": "Журнал этапов",
+  "kb": 11
+ },
+ {
+  "slug": "stage-09-report",
+  "title": "Этап 9: отчёт, README, финальная проверка",
+  "group": "Журнал этапов",
+  "kb": 5
+ },
+ {
+  "slug": "stage-10-kk-terms",
+  "title": "Stage 10: Kazakh term for administrator, `kz` display",
+  "group": "Журнал этапов",
+  "kb": 1
+ },
+ {
+  "slug": "stage-11-flags",
+  "title": "Этап 11: флаги платежа, аккаунта и угрозы на uz и kk",
+  "group": "Журнал этапов",
+  "kb": 9
+ },
+ {
+  "slug": "stage-13-polish",
+  "title": "Этап 13: последние замечания приёмки",
+  "group": "Журнал этапов",
+  "kb": 9
+ },
+ {
+  "slug": "stage-14-ui-polish",
+  "title": "Этап 14: интерфейс админа без сырых мест",
+  "group": "Журнал этапов",
+  "kb": 9
+ },
+ {
+  "slug": "stage-15-roles-review",
+  "title": "Этап 15: роли, разметка на сайте, проверка языка",
+  "group": "Журнал этапов",
+  "kb": 12
+ },
+ {
+  "slug": "stage-16-autodeploy",
+  "title": "Этап 16: непрерывный деплой на домашний сервер (pull-based CD)",
+  "group": "Журнал этапов",
+  "kb": 16
+ },
+ {
+  "slug": "stage-17b-local-mode",
+  "title": "Этап 17b: `make predict` без ключа, без сети, без GPU",
+  "group": "Журнал этапов",
+  "kb": 22
+ },
+ {
+  "slug": "stage-18-final",
+  "title": "Этап 18. Финальная сборка",
+  "group": "Журнал этапов",
+  "kb": 2
+ },
+ {
+  "slug": "stage-19-ru-review",
+  "title": "Этап 19: русский язык на экране «Проверка языка»",
+  "group": "Журнал этапов",
+  "kb": 6
+ },
+ {
+  "slug": "stage-20-queue-stats",
+  "title": "Этап 20. Панель статистики над очередью",
+  "group": "Журнал этапов",
+  "kb": 10
+ },
+ {
+  "slug": "stage-21-short-addresses",
+  "title": "Этап 21. Короткие адреса на сайте",
+  "group": "Журнал этапов",
+  "kb": 2
+ },
+ {
+  "slug": "stage-22-tester",
+  "title": "Этап 22. Роль «Тестер»",
+  "group": "Журнал этапов",
+  "kb": 0
+ },
+ {
+  "slug": "stage-23-open-jury",
+  "title": "Этап 23. Роль «Тестер» убрана, жюри входит без пароля",
+  "group": "Журнал этапов",
+  "kb": 7
+ },
+ {
+  "slug": "stage-24-jury-guide",
+  "title": "Этап 24. Руководство для жюри",
+  "group": "Журнал этапов",
+  "kb": 3
+ },
+ {
+  "slug": "stage-25-label-feedback",
+  "title": "Этап 25. Разметка: понятно, что сохранено",
+  "group": "Журнал этапов",
+  "kb": 1
+ },
+ {
+  "slug": "stage-26-stats-polish",
+  "title": "Этап 26. Панель статистики: ровнее и честнее",
+  "group": "Журнал этапов",
+  "kb": 6
+ },
+ {
+  "slug": "stage-27-kk-latin",
+  "title": "Этап 27: казахский латиницей определяется как `kk`",
+  "group": "Журнал этапов",
+  "kb": 8
+ },
+ {
+  "slug": "stage-28-queue-reset",
+  "title": "Этап 28. Демо-очередь не остаётся пустой",
+  "group": "Журнал этапов",
+  "kb": 1
+ },
+ {
+  "slug": "stage-32-review-skip",
+  "title": "Этап 32. Проверка языка: кто уже проверил, пропуск, только непроверенные",
+  "group": "Журнал этапов",
+  "kb": 8
+ },
+ {
+  "slug": "stage-34-admin-style",
+  "title": "Этап 34: ответы в стиле писем администраторов",
+  "group": "Журнал этапов",
+  "kb": 11
+ },
+ {
+  "slug": "stage-36-kk-signals",
+  "title": "Этап 36. Казахский и узбекский кириллицей без своих букв",
+  "group": "Журнал этапов",
+  "kb": 5
+ },
+ {
+  "slug": "stage-38-last-fixes",
+  "title": "Этап 38: последние правки перед заморозкой",
+  "group": "Журнал этапов",
+  "kb": 3
+ },
+ {
+  "slug": "stage-39-label-nav",
+  "title": "Этап 39. Навигация в разметке",
+  "group": "Журнал этапов",
+  "kb": 1
+ },
+ {
+  "slug": "stage-40-final-numbers",
+  "title": "Этап 40. Итоговые числа",
+  "group": "Журнал этапов",
+  "kb": 1
+ },
+ {
+  "slug": "stage-41-report-help-p3",
+  "title": "Этап 41. `report.help` получает p3",
+  "group": "Журнал этапов",
+  "kb": 1
+ },
+ {
+  "slug": "stage-43-quickstart",
+  "title": "Этап 43. Быстрый запуск",
+  "group": "Журнал этапов",
+  "kb": 1
+ },
+ {
+  "slug": "eval-summary",
+  "title": "Eval summary",
+  "group": "Метрики",
+  "kb": 4
+ },
+ {
+  "slug": "eval-summary-holdout",
+  "title": "Eval summary",
+  "group": "Метрики",
+  "kb": 2
+ }
+]
