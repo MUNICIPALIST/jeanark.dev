@@ -26,6 +26,12 @@ import ThemeToggle from "@/components/ThemeToggle.astro";
         Work
       </a>
       <a
+        href="#writing"
+        class="hidden text-sm text-muted transition-colors hover:text-foreground aria-[current=true]:text-foreground sm:inline"
+      >
+        Writing
+      </a>
+      <a
         href={`mailto:${site.email}`}
         data-magnetic
         class="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"

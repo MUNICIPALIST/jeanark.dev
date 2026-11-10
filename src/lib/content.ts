@@ -116,3 +116,23 @@ export const stack = [
   { group: "DevOps", items: ["Docker", "Kubernetes", "Nginx", "Git", "CI/CD"] },
   { group: "ML/Data", items: ["Python", "PyTorch", "scikit-learn", "SQL", "MLflow"] },
 ];
+
+/** Writing — long-form pages. Static HTML lives in /public/<slug>/index.html. */
+export type Article = {
+  title: string;
+  href: string;
+  blurb: string;
+  date: string;
+  tags: string[];
+};
+
+export const articles: Article[] = [
+  {
+    title: "How I build software with AI agents",
+    href: "/alfaria-process/",
+    blurb:
+      "An interactive map of the agent pipeline behind Alfaria (a private video-call service): the loops, which framework patterns survived our own experiments, and which didn't. In Russian.",
+    date: "Nov 2026",
+    tags: ["AI agents", "Process", "Experiments"],
+  },
+];
